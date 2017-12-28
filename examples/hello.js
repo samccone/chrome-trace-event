@@ -16,24 +16,23 @@
  * - See examples/object-mode.js for raw event objects.
  * - See examples/child.js for a larger example.
  */
-var evt = require('../lib/trace-event').createTracer();
-evt.on('data', function (data) {
-    console.log('EVENT: %j', data);
-});
+var evt = new (require("../lib/trace-event")).Tracer();
 
+evt.on("data", function(data) {
+  console.log("EVENT: %j", data);
+});
 
 // Instrument code with evt.{begin|instant|end} calls.
 function doSomething(cb) {
-    evt.begin({name: 'doSomething', id: '1'});
-    // Takes 1s to do all this processing for "something".
-    setTimeout(function () {
-        evt.end({name: 'doSomething', id: '1'});
-        cb();
-    }, 1000);
+  evt.begin({ name: "doSomething", id: "1" });
+  // Takes 1s to do all this processing for "something".
+  setTimeout(function() {
+    evt.end({ name: "doSomething", id: "1" });
+    cb();
+  }, 1000);
 }
 
-
-console.log('hi');
-doSomething(function () {
-    console.log('bye');
+console.log("hi");
+doSomething(function() {
+  console.log("bye");
 });
