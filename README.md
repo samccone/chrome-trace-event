@@ -1,27 +1,26 @@
-node-trace-event: A node library for creating trace event logs of program
+[![Build Status](https://travis-ci.org/samccone/chrome-trace-event.svg?branch=master)](https://travis-ci.org/samccone/chrome-trace-event)
+
+chrome-trace-event: A node library for creating trace event logs of program
 execution according to [Google's Trace Event
 format](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU).
 These logs can then be visualized with
-[trace-viewer](https://github.com/google/trace-viewer) to grok one's programs.
-
-TODO: quick picture example
-
-# Current Status
-
-Current still scratching my itch. No docs. No tests. Incomplete. Alpha.
+[trace-viewer](https://github.com/google/trace-viewer) or chrome devtools to grok one's programs.
 
 # Install
 
-    npm install trace-event
+    npm install chrome-trace-event
 
 # Usage
 
 TODO
 
 ```javascript
-var trace = new (require("trace-event")).Trace();
-trace.begin({ name: "myname", id: "some-id" });
-trace.end({ name: "myname", id: "some-id" });
+const Trace = require("chrome-trace-event").Tracer;
+const trace = new Trace({
+    noStream: true
+});
+trace.pipe(fs.createWriteStream(outPath));
+trace.flush();
 ```
 
 # Links
