@@ -20,7 +20,7 @@
     "tape": "4.8.0"
   },
   "engines": {
-    "node": ">=8.0"
+    "node": ">=6.0"
   },
   "scripts": {
     "test": "tape test/*.test.js"
