@@ -1,7 +1,7 @@
 {
   "name": "chrome-trace-event",
   "description": "A library to create a trace of your node app per Google's Trace Event format.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Trent Mick",
   "keywords": [
     "trace-event",
