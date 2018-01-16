@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/joyent/node-trace-event.git"
+    "url": "git://github.com/samccone/chrome-trace-event.git"
   },
   "main": "./lib/trace-event.js",
   "dependencies": {},
