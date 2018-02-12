@@ -1,6 +1,0 @@
-
-
-# Someday/maybe
-
-Look at https://github.com/google/trace-viewer/wiki and
-https://github.com/natduca/py_trace_event

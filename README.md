@@ -12,8 +12,6 @@ These logs can then be visualized with
 
 # Usage
 
-TODO
-
 ```javascript
 const Trace = require("chrome-trace-event").Tracer;
 const trace = new Trace({
@@ -27,8 +25,6 @@ trace.flush();
 
 * https://github.com/google/trace-viewer/wiki
 * https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU
-* TODO: read https://github.com/natduca/py_trace_event
-* https://github.com/google/trace-viewer
 
 # License
 

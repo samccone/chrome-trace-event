@@ -1,8 +1,8 @@
 {
   "name": "chrome-trace-event",
   "description": "A library to create a trace of your node app per Google's Trace Event format.",
-  "version": "0.1.1",
-  "author": "Trent Mick",
+  "version": "0.1.2",
+  "author": "Trent Mick, Sam Saccone",
   "keywords": [
     "trace-event",
     "trace",
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/samccone/chrome-trace-event.git"
+    "url": "github.com:samccone/chrome-trace-event"
   },
   "main": "./lib/trace-event.js",
   "dependencies": {},
