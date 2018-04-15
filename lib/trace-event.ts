@@ -11,7 +11,7 @@ import * as util from "util";
 
 // ---- internal support stuff
 
-interface Event {
+export interface Event {
   ts: number;
   pid: number;
   tid: number;
@@ -32,13 +32,13 @@ function evCommon(): Event {
 
 // ---- Tracer
 
-interface Fields {
+export interface Fields {
   cat?: any;
   args?: any;
   [filedName: string]: any;
 }
 
-interface TracerOptions {
+export interface TracerOptions {
   parent?: Tracer | null;
   fields?: Fields | null;
   objectMode?: boolean | null;
@@ -46,7 +46,7 @@ interface TracerOptions {
 
 }
 
-class Tracer extends ReadableStream {
+export class Tracer extends ReadableStream {
   private _objectMode!: boolean;
   /** Node Stream internal APIs */
   private _push: any;
@@ -217,4 +217,3 @@ class Tracer extends ReadableStream {
  * used for speed (premature optimization alert!).
  */
 
-module.exports.Tracer = Tracer;

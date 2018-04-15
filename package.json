@@ -16,6 +16,7 @@
     "url": "github.com:samccone/chrome-trace-event"
   },
   "main": "./dist/trace-event.js",
+  "typings": "./dist/trace-event.d.ts",
   "dependencies": {
     "tslib": "^1.9.0"
   },
