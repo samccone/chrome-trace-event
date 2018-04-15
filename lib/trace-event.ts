@@ -124,7 +124,7 @@ class Tracer extends ReadableStream {
    * If in no streamMode in order to flush out the trace
    * you need to call flush.
    */
-  flush() {
+  public flush() {
     if (this.noStream === true) {
       for (const evt of this.events) {
         this._push(evt);
@@ -134,7 +134,7 @@ class Tracer extends ReadableStream {
 
   _read(_: number) {}
 
-  _pushString(ev: Event) {
+  private _pushString(ev: Event) {
     if (!this.firstPush) {
       this.push("[");
       this.firstPush = true;
@@ -149,30 +149,30 @@ class Tracer extends ReadableStream {
   //    }
   //};
 
-  child(fields: Fields) {
+  public child(fields: Fields) {
     return new Tracer({
       parent: this,
       fields: fields
     });
   }
 
-  begin(fields: Fields) {
+  public begin(fields: Fields) {
     return this.mkEventFunc("b")(fields);
   }
 
-  end(fields: Fields) {
+  public end(fields: Fields) {
     return this.mkEventFunc("e")(fields);
   }
 
-  completeEvent(fields: Fields) {
+  public completeEvent(fields: Fields) {
     return this.mkEventFunc("X")(fields);
   }
 
-  instantEvent(fields: Fields) {
+  public instantEvent(fields: Fields) {
     return this.mkEventFunc("I")(fields);
   }
 
-  mkEventFunc(ph: string) {
+  public mkEventFunc(ph: string) {
     return (fields: Fields) => {
       var ev = evCommon();
       // Assign the event phase.
