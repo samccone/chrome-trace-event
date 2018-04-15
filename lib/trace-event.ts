@@ -5,11 +5,22 @@
  *      https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU
  */
 
-var stream = require("stream");
-var util = require("util");
+import { Readable as ReadableStream, ReadableOptions } from "stream"
+import * as util from "util";
+
+
 // ---- internal support stuff
 
-function evCommon() {
+interface Event {
+  ts: number;
+  pid: number;
+  tid: number;
+  /** event phase */
+  ph?: string;
+  [otherData: string]: any;
+}
+
+function evCommon(): Event {
   var hrtime = process.hrtime(); // [seconds, nanoseconds]
   var ts = hrtime[0] * 1000000 + Math.round(hrtime[1] / 1000); // microseconds
   return {
@@ -21,8 +32,31 @@ function evCommon() {
 
 // ---- Tracer
 
-class Tracer extends stream.Readable {
-  constructor(opts = {}) {
+interface Fields {
+  cat?: any;
+  args?: any;
+  [filedName: string]: any;
+}
+
+interface TracerOptions {
+  parent?: Tracer | null;
+  fields?: Fields | null;
+  objectMode?: boolean | null;
+  noStream?: boolean;
+
+}
+
+class Tracer extends ReadableStream {
+  private _objectMode!: boolean;
+  /** Node Stream internal APIs */
+  private _push: any;
+  private firstPush?: boolean;
+  private noStream: boolean = false;
+  private events: Event[]  = [];
+  private parent!: Tracer | null | undefined;
+  private fields!: Fields | null | undefined;
+
+  constructor(opts: TracerOptions = {}) {
     super();
     if (typeof opts !== "object") {
       throw new Error("Invalid options passed (must be an object)");
@@ -46,11 +80,10 @@ class Tracer extends stream.Readable {
     }
 
     this.noStream = opts.noStream || false;
-    this.events = [];
     this.parent = opts.parent;
 
     if (this.parent) {
-      this.fields = Object.assign({}, opts.parent.fields);
+      this.fields = Object.assign({}, opts.parent && opts.parent.fields);
     } else {
       this.fields = {};
     }
@@ -75,7 +108,7 @@ class Tracer extends stream.Readable {
       this._push = this.parent._push.bind(this.parent);
     } else {
       this._objectMode = Boolean(opts.objectMode);
-      var streamOpts = { objectMode: this._objectMode };
+      var streamOpts: ReadableOptions = { objectMode: this._objectMode };
       if (this._objectMode) {
         this._push = this.push;
       } else {
@@ -83,7 +116,7 @@ class Tracer extends stream.Readable {
         streamOpts.encoding = "utf8";
       }
 
-      stream.Readable.call(this, streamOpts);
+      ReadableStream.call(this, streamOpts);
     }
   }
 
@@ -99,14 +132,14 @@ class Tracer extends stream.Readable {
     }
   }
 
-  _read(size) {}
+  _read(_: number) {}
 
-  _pushString(ev) {
+  _pushString(ev: Event) {
     if (!this.firstPush) {
       this.push("[");
       this.firstPush = true;
     }
-    this.push(JSON.stringify(ev, "utf8") + ",\n", "utf8");
+    this.push(JSON.stringify(ev) + ",\n", "utf8");
   }
 
   // TODO Perhaps figure out getting a trailing ']' without ',]' if helpful.
@@ -116,31 +149,31 @@ class Tracer extends stream.Readable {
   //    }
   //};
 
-  child(fields) {
+  child(fields: Fields) {
     return new Tracer({
       parent: this,
       fields: fields
     });
   }
 
-  begin(...args) {
-    return this.mkEventFunc("b")(...args);
+  begin(fields: Fields) {
+    return this.mkEventFunc("b")(fields);
   }
 
-  end(...args) {
-    return this.mkEventFunc("e")(...args);
+  end(fields: Fields) {
+    return this.mkEventFunc("e")(fields);
   }
 
-  completeEvent(...args) {
-    return this.mkEventFunc("X")(...args);
+  completeEvent(fields: Fields) {
+    return this.mkEventFunc("X")(fields);
   }
 
-  instantEvent(...args) {
-    return this.mkEventFunc("I")(...args);
+  instantEvent(fields: Fields) {
+    return this.mkEventFunc("I")(fields);
   }
 
-  mkEventFunc(ph) {
-    return fields => {
+  mkEventFunc(ph: string) {
+    return (fields: Fields) => {
       var ev = evCommon();
       // Assign the event phase.
       ev.ph = ph;

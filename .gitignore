@@ -3,3 +3,6 @@
 /npm-debug.log
 /examples/*.log
 /examples/*.json
+
+*.log
+dist/
