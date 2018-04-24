@@ -3,7 +3,7 @@
  * to get raw JSON event object output.
  */
 
-var evt = new (require("../lib/trace-event")).Tracer({ objectMode: true });
+var evt = new (require("../dist/trace-event")).Tracer({ objectMode: true });
 evt.on("data", function(ev) {
   console.log('EVENT (type "%s"): %j', typeof ev, ev);
 });
