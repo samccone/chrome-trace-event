@@ -29,6 +29,7 @@
     "node": ">=6.0"
   },
   "scripts": {
+    "build": "tsc",
     "test": "tape test/*.test.js",
     "prepublish": "tsc --pretty"
   }
