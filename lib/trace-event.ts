@@ -6,9 +6,6 @@
  */
 
 import { Readable as ReadableStream, ReadableOptions } from "stream"
-import * as util from "util";
-
-
 // ---- internal support stuff
 
 export interface Event {
