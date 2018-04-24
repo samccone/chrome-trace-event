@@ -30,7 +30,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "tape test/*.test.js",
-    "prepublish": "tsc --pretty"
+    "test": "tape test/*.test.js"
   }
 }
