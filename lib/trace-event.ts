@@ -5,7 +5,7 @@
  *      https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU
  */
 
-import { Readable as ReadableStream, ReadableOptions } from "stream"
+import { Readable as ReadableStream, ReadableOptions } from "stream";
 // ---- internal support stuff
 
 export interface Event {
@@ -40,7 +40,6 @@ export interface TracerOptions {
   fields?: Fields | null;
   objectMode?: boolean | null;
   noStream?: boolean;
-
 }
 
 export class Tracer extends ReadableStream {
@@ -49,7 +48,7 @@ export class Tracer extends ReadableStream {
   private _push: any;
   private firstPush?: boolean;
   private noStream: boolean = false;
-  private events: Event[]  = [];
+  private events: Event[] = [];
   private parent!: Tracer | null | undefined;
   private fields!: Fields | null | undefined;
 
@@ -213,4 +212,3 @@ export class Tracer extends ReadableStream {
  * Dev Note: We don't explicitly assert that correct fields are
  * used for speed (premature optimization alert!).
  */
-
