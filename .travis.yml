@@ -5,6 +5,7 @@ language: node_js
 script:
   - yarn build
   - yarn test
+  - yarn check_format
 branches:
   only:
     - master
