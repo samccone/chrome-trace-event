@@ -5,7 +5,7 @@
 
 var fs = require("fs");
 
-var EVT = new (require("../lib/trace-event")).Tracer();
+var EVT = new (require("../dist/trace-event")).Tracer();
 EVT.pipe(process.stdout);
 
 function doSubTaskA(opts, cb) {

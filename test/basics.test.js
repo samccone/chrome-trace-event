@@ -3,7 +3,7 @@
  */
 
 var test = require("tape");
-var trace_event = require("../lib/trace-event");
+var trace_event = require("../dist/trace-event");
 
 // --- Tests
 test("exports", function(t) {

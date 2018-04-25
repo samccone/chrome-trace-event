@@ -16,7 +16,7 @@
  * - See examples/object-mode.js for raw event objects.
  * - See examples/child.js for a larger example.
  */
-var evt = new (require("../lib/trace-event")).Tracer();
+var evt = new (require("../dist/trace-event")).Tracer();
 
 evt.on("data", function(data) {
   console.log("EVENT: %j", data);
