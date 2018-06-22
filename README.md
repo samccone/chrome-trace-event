@@ -14,9 +14,7 @@ These logs can then be visualized with
 
 ```javascript
 const Trace = require("chrome-trace-event").Tracer;
-const trace = new Trace({
-    noStream: true
-});
+const trace = new Trace();
 trace.pipe(fs.createWriteStream(outPath));
 trace.flush();
 ```
