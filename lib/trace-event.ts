@@ -125,25 +125,28 @@ export class Tracer extends ReadableStream {
       for (const evt of this.events) {
         this._push(evt);
       }
+      this._flush();
     }
   }
 
   _read(_: number) {}
 
   private _pushString(ev: Event) {
+    var separator = "";
     if (!this.firstPush) {
       this.push("[");
       this.firstPush = true;
+    } else {
+      separator = ",\n";
     }
-    this.push(JSON.stringify(ev) + ",\n", "utf8");
+    this.push(separator + JSON.stringify(ev), "utf8");
   }
 
-  // TODO Perhaps figure out getting a trailing ']' without ',]' if helpful.
-  //Tracer.prototype._flush = function _flush() {
-  //    if (!this._objectMode) {
-  //        this.push(']')
-  //    }
-  //};
+  private _flush() {
+    if (!this._objectMode) {
+      this.push("]");
+    }
+  }
 
   public child(fields: Fields) {
     return new Tracer({
