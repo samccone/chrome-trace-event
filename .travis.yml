@@ -1,6 +1,9 @@
 sudo: false
 dist: trusty
 language: node_js
+arch:
+  - amd64
+  - ppc64le
 
 script:
   - yarn build
