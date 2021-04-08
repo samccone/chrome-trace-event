@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "module": "commonjs",
     "lib": [
       "es2015"
     ],
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./dist",
-    "importHelpers": true,
+    "importHelpers": false,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
