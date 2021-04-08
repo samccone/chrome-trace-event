@@ -12,8 +12,7 @@
     "google"
   ],
   "repository": {
-    "type": "git",
-    "url": "github.com:samccone/chrome-trace-event"
+    "url": "github:samccone/chrome-trace-event"
   },
   "main": "./dist/trace-event.js",
   "typings": "./dist/trace-event.d.ts",
