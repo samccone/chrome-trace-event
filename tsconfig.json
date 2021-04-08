@@ -6,7 +6,7 @@
       "es2015"
     ],
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./dist",
     "importHelpers": true,
     "strict": true,
