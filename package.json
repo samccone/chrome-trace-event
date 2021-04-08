@@ -17,9 +17,7 @@
   },
   "main": "./dist/trace-event.js",
   "typings": "./dist/trace-event.d.ts",
-  "dependencies": {
-    "tslib": "^2.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "*",
     "prettier": "^1.12.1",
