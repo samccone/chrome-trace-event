@@ -156,11 +156,11 @@ export class Tracer extends ReadableStream {
   }
 
   public begin(fields: Fields) {
-    return this.mkEventFunc("b")(fields);
+    return this.mkEventFunc("B")(fields);
   }
 
   public end(fields: Fields) {
-    return this.mkEventFunc("e")(fields);
+    return this.mkEventFunc("E")(fields);
   }
 
   public completeEvent(fields: Fields) {
